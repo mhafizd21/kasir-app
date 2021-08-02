@@ -1,25 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import styled, {ThemeProvider } from 'styled-components'
+import * as themes from './styled/themes';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  return(
+    <ThemeProvider theme={themes}>
+      <Header/>
+      <Container>
+        <MenuContainer>
+          Menu
+        </MenuContainer>
+        <ProductContainer>
+          Products
+        </ProductContainer>
+        <CartContainer>
+          Cart
+        </CartContainer>
+      </Container>
+    </ThemeProvider>
+  )
 }
+
+const Container = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 92vh;
+`
+
+const MenuContainer = styled.div`
+  width: 15%;
+  padding: 16px 36px;
+`
+
+const ProductContainer = styled.div`
+  width: 60%;
+  padding: 16px 36px;
+  border-right: 1px solid ${props => props.theme.grey};
+  border-left: 1px solid ${props => props.theme.grey};
+`
+
+const CartContainer = styled.div`
+  width: 25%;
+  padding: 16px 36px;
+
+`
 
 export default App;
