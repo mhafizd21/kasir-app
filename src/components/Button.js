@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-const Button = ({variant, children}) => {
+const Button = ({variant, children, action}) => {
   switch(variant){
     case "primary":
-      return (<PrimaryButton>{children}</PrimaryButton>)
+      return (<PrimaryButton onClick={action}>{children}</PrimaryButton>)
     case "secondary":
       return (<SecondaryButton>{children}</SecondaryButton>)
     case "tertiary":
-      return (<TertiaryButton>{children}</TertiaryButton>)
+      return (<TertiaryButton onClick={action}>{children}</TertiaryButton>)
     default:
       return (null)
   }

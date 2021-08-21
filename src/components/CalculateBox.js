@@ -1,12 +1,31 @@
 import styled from 'styled-components';
 import Button from './Button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { resetCart } from '../store/actions/products';
 
 const CalculateBox = () => {
   const carts = useSelector(state => state.product.carts);
   const total = carts.reduce((totalPrice, curr) => totalPrice + curr.price, 0);
+  const [pay, setPay] = useState('');
   const [change, setChange] = useState('');
+  const dispatch = useDispatch();
+
+  const changePay = e => {
+    setPay(e.target.value);
+  }
+
+  const calculateChange = ()=> {
+    if (pay > total) {
+      setChange(pay-total)
+    }
+  }
+
+  const resetCartItems = () => {
+    dispatch(resetCart());
+    setPay('');
+    setChange('');
+  }
 
   return(
     <CalculateContainer>
@@ -16,15 +35,15 @@ const CalculateBox = () => {
       </TotalItem>
       <PaymentItem>
         <p>Jumlah Bayar</p>
-        <input type="number"/>
+        <input type="number" value={pay} onChange={changePay}/>
       </PaymentItem>
       <ChangeItem>
         <p>Kembalian</p>
-        <p>1000000</p>
+        <p>{change}</p>
       </ChangeItem>
       <BtnAction>
-        <Button variant="tertiary">CANCEL</Button>
-        <Button variant="primary">SELESAI</Button>
+        <Button variant="tertiary" action={resetCartItems}>RESET</Button>
+        <Button variant="primary" action={calculateChange}>SELESAI</Button>
       </BtnAction>
     </CalculateContainer>
   )

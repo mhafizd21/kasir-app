@@ -66,6 +66,11 @@ const productReducer = (state = initialState, action) => {
         ...state,
         carts: state.carts.filter(item => item.id !== payload)
       }
+    case "RESET_CART":
+      return {
+        ...state,
+        carts: []
+      }
   }
 }
 
