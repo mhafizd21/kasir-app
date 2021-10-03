@@ -3,6 +3,8 @@ import Button from './Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { resetCart } from '../store/actions/products';
+import CurrencyFormat from './CurrencyFormat';
+import NumberFormat from 'react-number-format';
 
 const CalculateBox = () => {
   const carts = useSelector(state => state.product.carts);
@@ -12,7 +14,7 @@ const CalculateBox = () => {
   const dispatch = useDispatch();
 
   const changePay = e => {
-    setPay(e.target.value);
+    setPay(+e.target.value.split('.').join(''));
   }
 
   const calculateChange = ()=> {
@@ -31,19 +33,26 @@ const CalculateBox = () => {
     <CalculateContainer>
       <TotalItem>
         <p>Total</p>
-        <p>{total}</p>
+        <CurrencyFormat value={total} />
       </TotalItem>
       <PaymentItem>
         <p>Jumlah Bayar</p>
-        <input type="number" value={pay} onChange={changePay}/>
+        <NumberFormatStyled
+          thousandSeparator="."
+          decimalSeparator=","
+          displayType="input"
+          allowNegative="false"
+          onChange={changePay}
+          value={pay}
+        />
       </PaymentItem>
       <ChangeItem>
         <p>Kembalian</p>
-        <p>{change}</p>
+        <CurrencyFormat value={change} />
       </ChangeItem>
       <BtnAction>
         <Button variant="tertiary" action={resetCartItems}>RESET</Button>
-        <Button variant="primary" action={calculateChange}>SELESAI</Button>
+        <Button variant="primary" action={calculateChange}>HITUNG</Button>
       </BtnAction>
     </CalculateContainer>
   )
@@ -67,19 +76,6 @@ const PaymentItem = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  input[type="number"] {
-    border: unset;
-    border-bottom: 1px solid #CCC;
-    text-align: right;
-    -moz-appearance: textfield;
-    &:focus {
-      outline: none;
-    }
-    &::-webkit-inner-spin-button, 
-    &::-webkit-outer-spin-button{
-      -webkit-appearance: none;
-    }
-  }
 `;
 const ChangeItem = styled.div`
   display: flex;
@@ -91,5 +87,17 @@ const BtnAction = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+`;
+const NumberFormatStyled = styled(NumberFormat)`
+  border: unset;
+  border-bottom: 1px solid #CCC;
+  text-align: right;
+  -moz-appearance: textfield;
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-inner-spin-button, 
+  &::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+  }
 `;

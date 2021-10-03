@@ -9,7 +9,7 @@ import ListMenu from './components/ListMenu';
 import CalculateBox from './components/CalculateBox';
 
 const App = () => {
-  const products = useSelector(state => state.product.products);
+  const filteredProducts = useSelector(state => state.product.filteredProducts);
   const carts = useSelector(state => state.product.carts);
   return(
     <ThemeProvider theme={themes}>
@@ -19,11 +19,11 @@ const App = () => {
           <ListMenu/>
         </MenuContainer>
         <ProductContainer>
-          { products.map((item, i) => {
+          { !!filteredProducts.length ? filteredProducts.map((item, i) => {
               return(
                 <ProductCard key={i} item={item}/>
               )
-            })
+            }) : 'Products Not Found'
           }
         </ProductContainer>
         <SideContainer>
@@ -43,25 +43,29 @@ const App = () => {
 
 const Container = styled.div`
   display: flex;
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   height: 92vh;
 `
 
 const MenuContainer = styled.div`
   width: 15%;
   padding: 16px 0;
+  border-right: 1px solid ${props => props.theme.grey};
 `
 
 const ProductContainer = styled.div`
   width: 60%;
   padding: 16px 36px;
-  border-right: 1px solid ${props => props.theme.grey};
-  border-left: 1px solid ${props => props.theme.grey};
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  height: max-content;
+  align-items: flex-start;
+  max-height: 92vh;
+  overflow-y: auto;
 `
 const SideContainer = styled.div`
+  border-left: 1px solid ${props => props.theme.grey};
   width: 25%;
 `;
 

@@ -2,6 +2,8 @@ import { products } from '../../utils/data';
 
 const initialState = {
   products,
+  filteredProducts: [],
+  filterMenu: 'makanan',
   carts: []
 }
 
@@ -10,7 +12,11 @@ const productReducer = (state = initialState, action) => {
 
   switch(type){
     default:
-      return state;
+      const filteredProducts = state.products.filter(item => item.category === state.filterMenu);
+      return {
+        ...state,
+        filteredProducts,
+      };
     case "ADD_TO_CART":
       const isCartItem = state.carts.find(item => item.id === payload);
       const newCartItem = state.products.find(item => item.id === payload);
@@ -21,6 +27,7 @@ const productReducer = (state = initialState, action) => {
         }
       }
       else {
+        alert('Product Already in Cart');
         return state;
       }
     case "INC_CART":
@@ -70,6 +77,14 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         carts: []
+      }
+    case "FILTER_PRODUCTS":
+      const newFilter = payload;  
+      const newFilteredProducts = state.products.filter(item => item.category === newFilter);
+      return {
+        ...state,
+        filteredProducts: newFilteredProducts,
+        filterMenu: newFilter,
       }
   }
 }

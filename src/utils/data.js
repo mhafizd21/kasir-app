@@ -8,6 +8,13 @@ import makanan7 from '../assets/foods/makanan7.png';
 import makanan8 from '../assets/foods/makanan8.jpg';
 import makanan9 from '../assets/foods/makanan9.png';
 import makanan10 from '../assets/foods/makanan10.png';
+import hotTea from '../assets/drinks/hot-tea.jpg';
+import iceChocolate from '../assets/drinks/ice-chocolate.jpg';
+import latte from '../assets/drinks/latte.jpg';
+import mineralWater from '../assets/drinks/mineral-water.jpg';
+import orangeJuice from '../assets/drinks/orange-juice.jpg';
+import strawberryMilkshake from '../assets/drinks/strawberry-milkshake.jpg';
+
 export const products = [
   {
     id: 1,
@@ -81,37 +88,44 @@ export const products = [
   },
   {
     id: 11,
-    name: "Noodles With Tomato",
-    image: makanan1,
-    category: "makanan",
-    price: 13000
+    name: "Hot Tea",
+    image: hotTea,
+    category: "minuman",
+    price: 2000
   },
   {
     id: 12,
-    name: "Roasted Pork Belly",
-    image: makanan2,
-    category: "makanan",
-    price: 14000
+    name: "Ice Chocolate",
+    image: iceChocolate,
+    category: "minuman",
+    price: 12000
   },
   {
     id: 13,
-    name: "Eggplant Connellino",
-    image: makanan3,
-    category: "makanan",
-    price: 12000
+    name: "Latte",
+    image: latte,
+    category: "minuman",
+    price: 18000
   },
   {
     id: 14,
-    name: "Chocolate Cake",
-    image: makanan4,
-    category: "makanan",
-    price: 15000
+    name: "Mineral Water",
+    image: mineralWater,
+    category: "minuman",
+    price: 2000
   },
   {
     id: 15,
-    name: "Strawberry Pavlova Cake",
-    image: makanan5,
-    category: "makanan",
-    price: 12000
-  }
+    name: "Orange Juice",
+    image: orangeJuice,
+    category: "minuman",
+    price: 10000
+  },
+  {
+    id: 16,
+    name: "Strawberry Milkshake",
+    image: strawberryMilkshake,
+    category: "minuman",
+    price: 18000
+  },
 ]

@@ -30,3 +30,9 @@ export const resetCart = () => {
     type: "RESET_CART"
   }
 }
+export const filterProducts = filter => {
+  return {
+    type: "FILTER_PRODUCTS",
+    payload: filter,
+  }
+}

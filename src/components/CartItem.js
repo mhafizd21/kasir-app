@@ -3,6 +3,7 @@ import Counter from './Counter';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { incCart, decCart, removeCart } from '../store/actions/products';
+import CurrencyFormat from './CurrencyFormat';
 
 const CartItem = ({ item }) => {
   const [count, setCount] = useState(1);
@@ -33,7 +34,11 @@ const CartItem = ({ item }) => {
         </CounterNum>
         <Counter dec={() => dec(item.id)}/>
       </CounterContainer>
-      <div>{item.price}</div>
+      <div>
+        <CurrencyFormat
+          value={item.price}
+        />
+      </div>
     </CartItemStyled>
   )
 }
